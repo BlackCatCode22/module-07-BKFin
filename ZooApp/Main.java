@@ -11,6 +11,22 @@ import java.util.HashMap;
 
 public class Main {
 
+            // ArrayList of Hyena names.
+            static ArrayList<String> hyenaNames = new ArrayList<>();
+            // ArrayList of Lion names.
+            static ArrayList<String> lionNames = new ArrayList<>();
+            // ArrayList of Tiger names.
+            static ArrayList<String> tigerNames = new ArrayList<>();
+            // ArrayList of Bear names.
+            static ArrayList<String> bearNames = new ArrayList<>();
+
+            // ArrayList of Animal objects
+            static ArrayList<Animal> animals = new ArrayList<>();
+
+            // HashMap will be holding animal count
+            static HashMap<String, Integer> animalCount = new HashMap<>();
+
+  
     public static void main(String[] args) throws FileNotFoundException {
 
         // local variables
@@ -24,12 +40,6 @@ public class Main {
         String habitat;
         String id;
 
-        // ArrayList of Animal objects
-        ArrayList<Animal> animals = new ArrayList<>();
-
-        // HashMap will be holding animal count
-
-        HashMap<String, Integer> animalCount = new HashMap<>();
 
         // Open an external file, parse it line by line, and get age and species
         String filePath = "./ZooApp/arrivingAnimals.txt";
@@ -110,14 +120,14 @@ public class Main {
         // Parse the animalNames.txt file and pull the names separated by commas
         // Then use the setter to overwrite the names in the ArrayList
 
-        // ArrayList of Hyena names.
-        ArrayList<String> hyenaNames = new ArrayList<>();
-        // ArrayList of Lion names.
-        ArrayList<String> lionNames = new ArrayList<>();
-        // ArrayList of Tiger names.
-        ArrayList<String> tigerNames = new ArrayList<>();
-        // ArrayList of Bear names.
-        ArrayList<String> bearNames = new ArrayList<>();
+        // // ArrayList of Hyena names.
+        // ArrayList<String> hyenaNames = new ArrayList<>();
+        // // ArrayList of Lion names.
+        // ArrayList<String> lionNames = new ArrayList<>();
+        // // ArrayList of Tiger names.
+        // ArrayList<String> tigerNames = new ArrayList<>();
+        // // ArrayList of Bear names.
+        // ArrayList<String> bearNames = new ArrayList<>();
 
         // Open an external file, parse it line by line, and fill the name arrayLists
         String aFilePath = "./ZooApp/animalNames.txt";
@@ -181,48 +191,7 @@ public class Main {
             e.printStackTrace();
         }
 
-        // Name the animals, removing the name after each loop
-        // Setting a unique ID as well during the loop.  With the names removed
-        // the IDs/Names can't be duplicated
-
-        int hyID = 1;
-        int liID = 1;
-        int tiID = 1;
-        int beID = 1;
-
-        for (Animal animal : animals) {
-            if (animal.species.equals("hyena")) {
-                animal.setName(hyenaNames.getFirst());
-                animal.setId("Hy0" + hyID);
-                hyID++;
-                // Pop the first hyena name off the list
-                hyenaNames.remove(0);
-            }
-            if (animal.species.equals("lion")) {
-                animal.setName(lionNames.getFirst());
-                animal.setId("Li0" + liID);
-                liID++;
-                // Pop the first lion name off the list
-                lionNames.remove(0);
-            }
-            if (animal.species.equals("tiger")) {
-                animal.setName(tigerNames.getFirst());
-                animal.setId("Ti0" + tiID);
-                tiID++;
-                // Pop the first tiger name off the list
-                tigerNames.remove(0);
-            }
-            if (animal.species.equals("bear")) {
-                animal.setName(bearNames.getFirst());
-                animal.setId("Be0" + beID);
-                beID++;
-                // Pop the first bear name off the list
-                bearNames.remove(0);
-            }
-            // Determine birthday
-            String birthCalc = genBirthDay(animal.getAge(), animal.getBirthday());
-            animal.setBirthday(birthCalc);
-        }
+        genUniqueID();
 
         // Write the report, iterating through the animal objects and outputting the
         // data by species with name and age
@@ -267,6 +236,53 @@ public class Main {
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+    }
+
+    public static void genUniqueID() {
+
+        // Name the animals, removing the name after each loop
+        // Setting a unique ID as well during the loop.  With the names removed
+        // the IDs/Names can't be duplicated
+
+        int hyID = 1;
+        int liID = 1;
+        int tiID = 1;
+        int beID = 1;
+
+        for (Animal animal : animals) {
+            if (animal.species.equals("hyena")) {
+                animal.setName(hyenaNames.getFirst());
+                animal.setId("Hy0" + hyID);
+                hyID++;
+                // Pop the first hyena name off the list
+                hyenaNames.remove(0);
+            }
+            if (animal.species.equals("lion")) {
+                animal.setName(lionNames.getFirst());
+                animal.setId("Li0" + liID);
+                liID++;
+                // Pop the first lion name off the list
+                lionNames.remove(0);
+            }
+            if (animal.species.equals("tiger")) {
+                animal.setName(tigerNames.getFirst());
+                animal.setId("Ti0" + tiID);
+                tiID++;
+                // Pop the first tiger name off the list
+                tigerNames.remove(0);
+            }
+            if (animal.species.equals("bear")) {
+                animal.setName(bearNames.getFirst());
+                animal.setId("Be0" + beID);
+                beID++;
+                // Pop the first bear name off the list
+                bearNames.remove(0);
+            }
+            // Determine birthday
+            String birthCalc = genBirthDay(animal.getAge(), animal.getBirthday());
+            animal.setBirthday(birthCalc);
         }
 
     }
